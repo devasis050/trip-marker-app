@@ -19,6 +19,7 @@ app.get('/', (req, res) => {
 
 app.get('/oauth/redirect', (req, res) => {
     const url = `${process.env.TRIP_MARKER_SERVRE_URL}/auth/code`;
+    console.log('/oauth/redirect invoked:', url);
     if(req.query.error) {
         axios.post(url, {error: req.query.error});
         res.redirect('/');
