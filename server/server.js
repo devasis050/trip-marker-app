@@ -12,6 +12,7 @@ app.use(cookieParser());
 app.use('/dist', express.static(distPath));
 
 app.get('/', (req, res) => {
+    console.log('/ invoked');
     const htmlPath = path.join(__dirname, '/../index.html')
     res.sendFile(htmlPath);
 })
