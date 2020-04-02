@@ -35,4 +35,4 @@ app.get('/oauth/redirect', (req, res) => {
     }
 })
 
-app.listen(process.env.APP_PORT, () => console.log(`app started at ${process.env.APP_PORT}`));
+app.listen(process.env.PORT, () => console.log(`app started at ${process.env.PORT}`));

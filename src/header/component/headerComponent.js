@@ -13,7 +13,6 @@ class Header extends React.Component {
 
     componentDidMount() {
         const userSessionCookie = Cookies.get('userSession');
-        console.log('Server call to:', getUserUrl());
         if(userSessionCookie) {
             axios.post(getUserUrl(), {userSession:userSessionCookie}).then(res => {
                 if(res.status === 200) {
