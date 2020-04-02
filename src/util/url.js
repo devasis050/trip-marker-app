@@ -1,9 +1,9 @@
 
-const FB_CLIENT_ID = process.env.FB_CLIENT_ID || '212634969918380';
-const REDIRECT_URL = process.env.REDIRECT_URL || 'http://localhost:3000/oauth/redirect';
+const FB_CLIENT_ID = '212634969918380';
+const REDIRECT_URL = 'https://tripmarker.herokuapp.com/oauth/redirect'; //'http://localhost:3000/oauth/redirect';
 const RESPONSE_TYPE = 'code';
-const FB_OAUTH_URL = process.env.FB_OAUTH_URL || 'https://www.facebook.com/v6.0/dialog/oauth';
-const TRIP_MARKER_SERVRE_URL = process.env.TRIP_MARKER_SERVRE_URL || 'http://localhost:8080';
+const FB_OAUTH_URL = 'https://www.facebook.com/v6.0/dialog/oauth';
+const TRIP_MARKER_SERVRE_URL = 'https://tripmarker-server.herokuapp.com'; //'http://localhost:8080';
 
 const getPlaceSearchUrl = (text) => {
     return `${TRIP_MARKER_SERVRE_URL}/search?place=${text}`;
