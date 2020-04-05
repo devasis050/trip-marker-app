@@ -15,31 +15,32 @@ class SearchResult extends React.Component {
         this.props.clearSearchResult();
         
         //Test code
-        let markerPlace = {};
-        if(searchPlace.placeId == 'ChIJ4zHP-Sije4gRBDEsVxunOWg') {
-            markerPlace =  {placeId:'123asd', 
-                formattedAddress:'Belgium, pin-12314', 
-                location: {lat:42.43, lng: -121.13}};
-        } else {
-            markerPlace =  {placeId:'123ert', 
-                formattedAddress:'Paris, pin-12314', 
-                location: {lat:41.43, lng: -121.13}};
-        }
+        // let markerPlace = {};
+        // if(searchPlace.placeId == 'ChIJ4zHP-Sije4gRBDEsVxunOWg') {
+        //     markerPlace =  {placeId:'123asd', 
+        //         name: 'Louvre Museum',   
+        //         formattedAddress:'Belgium, pin-12314', 
+        //         location: {lat:42.43, lng: -121.13}};
+        // } else {
+        //     markerPlace =  {placeId:'123ert', 
+        // name: 'Louvre Museum 2',
+        //         formattedAddress:'Paris, pin-12314', 
+        //         location: {lat:41.43, lng: -121.13}};
+        // }
 
-        setTimeout(() => {
-            let action = createAddMarkerAction(markerPlace);
-            this.props.addMarker(action);
-        }, 100);
+        // setTimeout(() => {
+        //     let action = createAddMarkerAction(markerPlace);
+        //     this.props.addMarker(action);
+        // }, 100);
         //Test code ends 
 
-        // const getPlaceUrl = getPlaceByPlaceIdUrl(searchPlace.placeId);
+        const getPlaceUrl = getPlaceByPlaceIdUrl(searchPlace.placeId);
 
-        //  axios.get(getPlaceUrl)
-        // .then((response) => {
-        //     console.log(response.data);
-        //     let action = createAddMarkerAction(response.data);
-        //     this.props.addMarker(action);
-        // });
+         axios.get(getPlaceUrl)
+        .then((response) => {
+            let action = createAddMarkerAction(response.data);
+            this.props.addMarker(action);
+        });
 
     }
 

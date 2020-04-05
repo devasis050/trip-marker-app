@@ -22,4 +22,7 @@ const getUserUrl = () => {
     return `${TRIP_MARKER_SERVRE_URL}/user`
 }
 
-export {getPlaceSearchUrl, getPlaceByPlaceIdUrl, getFbOauthUrl, getUserUrl};
+const getApiKeyUrl = () => {
+    return `${TRIP_MARKER_SERVRE_URL}/api-key`;
+}
+export {getPlaceSearchUrl, getPlaceByPlaceIdUrl, getFbOauthUrl, getUserUrl, getApiKeyUrl};

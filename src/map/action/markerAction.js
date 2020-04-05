@@ -1,4 +1,4 @@
-import {ADD_MARKER, REMOVE_MARKER} from '../../redux/actionTypes'
+import {ADD_MARKER, REMOVE_MARKER, ADD_API_KEY} from '../../redux/actionTypes'
 
 const createAddMarkerAction = (marker) => {
     return {
@@ -11,4 +11,8 @@ const createRemoveMarkerAction = (placeId) => {
     return {type: REMOVE_MARKER, payload : {placeId}};
 }
 
-export {createAddMarkerAction, createRemoveMarkerAction};
+const createAddApiKeyAction = (key) => {
+    return {type: ADD_API_KEY, payload:key};
+}
+
+export {createAddMarkerAction, createRemoveMarkerAction, createAddApiKeyAction};

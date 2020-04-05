@@ -44,22 +44,30 @@ class DirectionComponent extends React.Component {
                     <h2 className='pt-4' >Direction</h2>
                     <select id='fromPlace' value={this.state.fromId} className='form-control form-control-sm mt-2' onChange={() => this.onPlaceChange()}>
                         <option value=''>From</option>
-                {markerPlaces.map((markerPlace, index) => (<option key={markerPlace.placeId} value={markerPlace.placeId}> {index+1}. {markerPlace.formattedAddress}</option>))}
+                        {markerPlaces.map((markerPlace, index) => 
+                            (<option key={markerPlace.placeId} value={markerPlace.placeId}> 
+                                {index+1}. {markerPlace.name || markerPlace.formattedAddress}
+                            </option>))}
                     </select>
                     
                     <select id='toPlace' value={this.state.toId} className='form-control form-control-sm mt-2'  onChange={() => this.onPlaceChange()}>
                         <option value=''>To</option>
-                        {markerPlaces.map((markerPlace, index) => (<option key={markerPlace.placeId} value={markerPlace.placeId}> {index+1}. {markerPlace.formattedAddress}</option>))}
+                        {markerPlaces.map((markerPlace, index) => 
+                            (<option key={markerPlace.placeId} value={markerPlace.placeId}> 
+                                {index+1}. {markerPlace.name || markerPlace.formattedAddress}
+                            </option>))}
                     </select>
                     {showSameValueError ? <div className='text-danger'><strong>From</strong> and <b>To</b> location can not be same.</div> : ''}
                     <table className='container-fluid mt-2'>
                         <tbody>
                         <tr>
                             <td className='w-50'>
-                                <button type='button' className='btn btn-sm btn-primary btn-block' disabled={goButtonDisabled} onClick={() => this.goBtnClickHandler()}>Go</button>
+                                <button type='button' className='btn btn-sm btn-primary btn-block' disabled={goButtonDisabled} 
+                                    onClick={() => this.goBtnClickHandler()}>Go</button>
                             </td>
                             <td className='w-50'>
-                                <button className="btn btn-sm btn-block btn-secondary" onClick={() => this.clearBtnClickHandler()}>Clear</button>
+                                <button className="btn btn-sm btn-block btn-secondary" 
+                                    onClick={() => this.clearBtnClickHandler()}>Clear</button>
                             </td>
                         </tr>
                         </tbody>

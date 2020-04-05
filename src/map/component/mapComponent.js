@@ -2,6 +2,9 @@ import React from 'react';
 // import {Map, GoogleApiWrapper, Marker} from 'google-maps-react';
 import { connect } from 'react-redux';
 import GoogleMapReact from 'google-map-react';
+import Axios from 'axios';
+import { getApiKeyUrl } from '../../util/url';
+import { createAddApiKeyAction } from '../action/markerAction';
 // import MarkerComponent from './markerComponent';
 
 class MapComponent extends React.Component {
@@ -11,6 +14,12 @@ class MapComponent extends React.Component {
         this.state = {};
         this.markers = [];
         this.routes = [];
+    }
+
+    componentDidMount() {
+        Axios.post(getApiKeyUrl()).then(res => {
+            this.props.dispatch(createAddApiKeyAction(res.data));
+        });
     }
 
     loadDirection() {
@@ -38,7 +47,7 @@ class MapComponent extends React.Component {
                     route.setMap(map);
                     this.routes.push(route);
                 } else {
-                    window.alert('Directions request failed due to ' + status);
+                    console.log('Directions request failed due to ' + status);
                 }
             });
         }
@@ -46,8 +55,10 @@ class MapComponent extends React.Component {
     }
 
     componentDidUpdate() {
-        this.onMapLoaded();
-        this.loadDirection();
+        if(this.state.maps) {
+            this.onMapLoaded();
+            this.loadDirection();
+        }
     }
 
     onMapLoaded() {
@@ -82,12 +93,12 @@ class MapComponent extends React.Component {
           };
 
         this.clearMarker();
-
+        
         return (
-            <div>
+            this.props.API_KEY ? (<div>
                 <GoogleMapReact
                     bootstrapURLKeys={{
-                        key: 'API_KEY', 
+                        key: this.props.API_KEY, 
                         language: 'en'
                     }}
                     style= {mapStyles}
@@ -98,7 +109,7 @@ class MapComponent extends React.Component {
                 >
                     
                 </GoogleMapReact>
-            </div>
+            </div>) : (<div>Map loading..</div>)
         )
     }
 }
@@ -106,7 +117,8 @@ class MapComponent extends React.Component {
 function mapStateToProps(state) {
     return {
         markerPlaces: state.markers, 
-        direction: state.direction
+        direction: state.direction,
+        API_KEY: state.apiKey
     }
 }
 

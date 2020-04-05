@@ -10,7 +10,7 @@ class SearchBar extends React.Component {
     constructor() {
         super();
         this.search = this.search.bind(this);
-        this.debouncedSeaarch = debounce(200, this.search)
+        this.debouncedSearch = debounce(200, this.search)
     }
 
 
@@ -21,24 +21,24 @@ class SearchBar extends React.Component {
         // if(text) {  }
 
         //Mock code - start 
-        const response = [
-            {"description" : "Paris, TN, USA", "placeId" : "ChIJ4zHP-Sije4gRBDEsVxunOWg"},
-            {"description" : "Paris, Brant, ON, Canada", "placeId" : "ChIJsamfQbVtLIgR-X18G75Hyi0"},
-            {"description" : "Paris, IL, USA", "placeId" : "ChIJO5XGnIyXcogRT-7Ymxr9xgo"}
-        ]
-        setTimeout(()=>{
-                let action = createUpdateSearchResultAction(response);
-                this.props.updatePlacesSearchResult(action);
-        }, 10)
+        // const response = [
+        //     {"description" : "Paris, TN, USA", "placeId" : "ChIJ4zHP-Sije4gRBDEsVxunOWg"},
+        //     {"description" : "Paris, Brant, ON, Canada", "placeId" : "ChIJsamfQbVtLIgR-X18G75Hyi0"},
+        //     {"description" : "Paris, IL, USA", "placeId" : "ChIJO5XGnIyXcogRT-7Ymxr9xgo"}
+        // ]
+        // setTimeout(()=>{
+        //         let action = createUpdateSearchResultAction(response);
+        //         this.props.updatePlacesSearchResult(action);
+        // }, 10)
 
         //Mock code - end
 
-        // const URL = getPlaceSearchUrl(text)
-        // axios.get(URL)
-        // .then((response) => {
-        //     let action = createUpdateSearchResultAction(response.data);
-        //     this.props.updatePlacesSearchResult(action);
-        // });
+        const URL = getPlaceSearchUrl(text)
+        axios.get(URL)
+        .then((response) => {
+            let action = createUpdateSearchResultAction(response.data);
+            this.props.updatePlacesSearchResult(action);
+        });
 
     }
 
@@ -49,7 +49,7 @@ class SearchBar extends React.Component {
                     type='search' 
                     className='form-control py-2 border-right-0 border'
                     placeholder="search for location"
-                    onKeyUp={() => this.debouncedSeaarch()}
+                    onKeyUp={() => this.debouncedSearch()}
                 />
                 <span className="input-group-append">
                     <div className="input-group-text bg-transparent"><i className="fa fa-search"></i></div>

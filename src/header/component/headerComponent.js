@@ -23,9 +23,7 @@ class Header extends React.Component {
 
     }
 
-
-
-    logoutHandeler() {
+    logoutHandler() {
         const url = `${window.location.origin.toString()}/logout`;
         axios(url).then((res) => {
             this.props.dispatch(deleteUserAction());
@@ -34,7 +32,7 @@ class Header extends React.Component {
 
     render() {
         const isUserAuthenticated = this.props.user && this.props.user.isAuthenticated;
-        
+
         return (
             <div className='row h-10 container-fluid'>
                 <table className='w-100'>
@@ -54,7 +52,7 @@ class Header extends React.Component {
                                         <span className="fa fa-facebook"></span> Login with faccebook
                                     </a>
                                 ) : (
-                                    <button className='btn btn-link btn-sm float-right' onClick={() => this.logoutHandeler()}>Logout</button>
+                                    <button className='btn btn-link btn-sm float-right' onClick={() => this.logoutHandler()}>Logout</button>
                                 )}
                                 
                             </td>
