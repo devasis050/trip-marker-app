@@ -19,7 +19,6 @@ app.get('/', (req, res) => {
 
 app.get('/oauth/redirect', (req, res) => {
     const url = `${process.env.TRIP_MARKER_SERVRE_URL}/auth/code`;
-    console.log('/oauth/redirect invoked:', url);
     if(req.query.error) {
         axios.post(url, {error: req.query.error});
         res.redirect('/');
@@ -34,6 +33,12 @@ app.get('/oauth/redirect', (req, res) => {
             res.redirect('/');
         });
     }
+})
+
+app.get('/logout', (req, res) => {
+    console.log('/logout');
+    res.clearCookie('userSession');
+    res.send('successful');
 })
 
 app.listen(process.env.PORT, () => console.log(`app started at ${process.env.PORT}`));

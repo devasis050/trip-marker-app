@@ -1,7 +1,7 @@
 import React from 'react';
 import {getFbOauthUrl, getUserUrl} from '../../util/url';
 import axios from 'axios';
-import {updateUserAction} from '../action/userAction';
+import {updateUserAction, deleteUserAction} from '../action/userAction';
 import {connect} from 'react-redux';
 import Cookies from 'js-cookie';
 
@@ -23,8 +23,18 @@ class Header extends React.Component {
 
     }
 
+
+
+    logoutHandeler() {
+        const url = `${window.location.origin.toString()}/logout`;
+        axios(url).then((res) => {
+            this.props.dispatch(deleteUserAction());
+        })
+    }
+
     render() {
         const isUserAuthenticated = this.props.user && this.props.user.isAuthenticated;
+        
         return (
             <div className='row h-10 container-fluid'>
                 <table className='w-100'>
@@ -44,7 +54,7 @@ class Header extends React.Component {
                                         <span className="fa fa-facebook"></span> Login with faccebook
                                     </a>
                                 ) : (
-                                    <button className='btn btn-link btn-sm float-right'>Logout</button>
+                                    <button className='btn btn-link btn-sm float-right' onClick={() => this.logoutHandeler()}>Logout</button>
                                 )}
                                 
                             </td>

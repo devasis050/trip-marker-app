@@ -1,5 +1,5 @@
 
-import {UPDATE_USER} from '../../redux/actionTypes'
+import {UPDATE_USER, DELETE_USER} from '../../redux/actionTypes'
 
 const updateUserAction = (user) => {
    return {
@@ -8,4 +8,10 @@ const updateUserAction = (user) => {
     }
 }
 
-export {updateUserAction};
+const deleteUserAction = () => {
+    return {
+        type: DELETE_USER,
+    }
+}
+
+export {updateUserAction, deleteUserAction};
