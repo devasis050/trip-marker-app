@@ -10,24 +10,44 @@ import Header from './header/component/headerComponent';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import AuthRedirect from './authredirect/component/authRedirectComponent';
 
-const App = () => {
-    return (
-        <div className='container-fluid pt-2 h-100'>
-            <Header />
-            <div className='row bg-light mt-1 h-100'>
-                <div className='col-4'>
-                    <div>
-                        <SearchComponent />
-                        <MarkerList />
-                        <DirectionComponent/>
+class App extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {sidebarCollapse:false};
+    }
+
+    sideBarCollapseButtonHandler() {
+        this.setState({sidebarCollapse:!this.state.sidebarCollapse});
+    }
+
+    render() {
+        const sideBarGridClassName = this.state.sidebarCollapse ? 'd-none' : 'col-9 col-sm-4';
+        const mapGridClassName = this.state.sidebarCollapse ? 'col-12' : 'col-3 col-sm-8';
+        
+        return (
+            <div className='container-fluid pt-2 h-100'>
+                <Header />
+                <div className='row bg-light mt-1 h-100'>
+                    <div className={sideBarGridClassName}>
+                        <div>
+                            <SearchComponent />
+                            <MarkerList />
+                            <DirectionComponent/>
+                        </div>
+                    </div>
+                    <div className={mapGridClassName}>
+                        <button style={{zIndex:1, left:0}} type="button" id="sidebarCollapse" 
+                                onClick = {() => this.sideBarCollapseButtonHandler()}
+                                className="position-absolute btn btn-secondary">
+                            {this.state.sidebarCollapse ? (<i class="fas fa-chevron-right"></i>) : <i class="fas fa-chevron-left"></i>}
+                        </button>
+                        <MapComponent />
                     </div>
                 </div>
-                <div className='col-8'>
-                    <MapComponent />
-                </div>
             </div>
-        </div>
-    )
+        )
+    }
 } 
 
 const Root = () => {
