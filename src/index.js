@@ -40,7 +40,7 @@ class App extends React.Component {
                         <button style={{zIndex:1, left:0}} type="button" id="sidebarCollapse" 
                                 onClick = {() => this.sideBarCollapseButtonHandler()}
                                 className="position-absolute btn btn-secondary">
-                            {this.state.sidebarCollapse ? (<i class="fas fa-chevron-right"></i>) : <i class="fas fa-chevron-left"></i>}
+                            {this.state.sidebarCollapse ? (<i className="fas fa-chevron-right"></i>) : <i className="fas fa-chevron-left"></i>}
                         </button>
                         <MapComponent />
                     </div>

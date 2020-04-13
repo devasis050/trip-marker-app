@@ -25,6 +25,23 @@ class DirectionComponent extends React.Component {
         this.props.dispatch(createClearDirectionAction());
     }
 
+    componentDidUpdate() {
+        const {fromId, toId} = this.state;
+        if(fromId) {
+            const fromPlace = this.props.markerPlaces.find(markerPlace=> markerPlace.placeId ===fromId);
+            if(!fromPlace) {
+                this.setState({fromId:''});
+            } 
+        }
+        if(toId) {
+            const toPlace = this.props.markerPlaces.find(markerPlace=> markerPlace.placeId ===toId);
+            if(!toPlace) {
+                this.setState({toId:''});
+            } 
+        }
+
+    }
+
     render() {
 
         let goButtonDisabled = true;

@@ -1,7 +1,8 @@
 
 import React from 'react';
 import MarkerDetailComponent from './markerDetailComponent';
-import {createRemoveMarkerAction} from '../action/markerAction'
+import {createRemoveMarkerAction} from '../action/markerAction';
+import {createClearDirectionAction} from './../../direction/action/directionAction';
 import { connect } from 'react-redux';
 
 class MarkerList extends React.Component {
@@ -14,6 +15,9 @@ class MarkerList extends React.Component {
     removeClickHandler(placeId) {
         const action = createRemoveMarkerAction(placeId);
         this.props.removeMarker(action);
+        if(placeId === this.props.direction.toId || placeId === this.props.direction.fromId) {
+            this.props.ClearDirectionAction();
+        }
     }
 
     render() {
@@ -36,13 +40,15 @@ class MarkerList extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        markerPlaces: state.markers
+        markerPlaces: state.markers,
+        direction: state.direction
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        removeMarker: (action) => {dispatch(action)}
+        removeMarker: (action) => {dispatch(action)},
+        ClearDirectionAction : () => {dispatch(createClearDirectionAction())}
     }
 }
 

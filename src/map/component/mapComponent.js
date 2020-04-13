@@ -28,10 +28,10 @@ class MapComponent extends React.Component {
         let directionsService = new maps.DirectionsService();
         const fromId = this.props.direction.fromId;
         const toId = this.props.direction.toId;
+        let fromPlace = this.props.markerPlaces.find(markerPlace => markerPlace.placeId === fromId);
+        let toPlace = this.props.markerPlaces.find(markerPlace => markerPlace.placeId === toId);
 
-        if (fromId && toId) {
-            let fromPlace = this.props.markerPlaces.find(markerPlace => markerPlace.placeId === fromId);
-            let toPlace = this.props.markerPlaces.find(markerPlace => markerPlace.placeId === toId);
+        if (fromPlace && toPlace) {
             directionsService.route({
                 origin: fromPlace.location,
                 destination: toPlace.location,
@@ -55,7 +55,7 @@ class MapComponent extends React.Component {
     }
 
     componentDidUpdate() {
-        if(this.state.maps) {
+        if(this.state.maps && this.props.markerPlaces.length > 0) {
             this.onMapLoaded();
             this.loadDirection();
         }
@@ -76,7 +76,6 @@ class MapComponent extends React.Component {
             bounds.extend(markerPlace.location);
         });
         map.fitBounds(bounds)
-        this.loadDirection(maps, map);
     }
 
     clearMarker() {
@@ -102,14 +101,14 @@ class MapComponent extends React.Component {
                         language: 'en'
                     }}
                     style= {mapStyles}
-                    defaultCenter ={{lat: 37.7699298, lng: -122.4491504}}
-                    zoom={8}
+                    defaultCenter ={{lat: 12.9716, lng: 77.5946}}
+                    zoom={5}
                     yesIWantToUseGoogleMapApiInternals={true}
                     onGoogleApiLoaded={({maps, map})=> this.setState({maps, map})}
                 >
                     
                 </GoogleMapReact>
-            </div>) : (<div>Map loading..</div>)
+            </div>) : (<div style={mapStyles} className='text-center pt-5'>Map loading..</div>)
         )
     }
 }
